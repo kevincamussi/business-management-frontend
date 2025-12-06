@@ -5,7 +5,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { getHolidays, type Holiday } from "../services/holidays";
+import { getHolidays, type Holiday } from "../services/holidays.service";
 import { HolidayForm } from "../components";
 import { useSuggestions } from "../hooks/useSuggestions";
 import { useRouter } from "next/navigation";

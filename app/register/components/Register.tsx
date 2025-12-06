@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { registerUser } from "./services/auth";
+import { registerUser } from "../services/register.service";
 import { useRouter } from "next/navigation";
 
 type RegisterFormData = {

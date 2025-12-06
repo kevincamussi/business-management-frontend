@@ -4,7 +4,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { createHoliday } from "../services/holidays";
+import { createHoliday } from "../services/holidays.service";
 import { useDropdownSuggestions } from "../hooks/useDropdownSuggestions";
 import { onlyLetters } from "../../shared/utils/onlyLetters";
 

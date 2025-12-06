@@ -1,5 +1,3 @@
-import React from "react";
-
 type SubmitButtonProps = {
   loading: boolean;
   label: string;

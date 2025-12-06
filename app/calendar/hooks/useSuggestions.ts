@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { getAutocomplete } from "../services/autocomplete";
+import { getAutocomplete } from "../services/autocomplete.service";
 
 type Field = "employee_name" | "department";
 

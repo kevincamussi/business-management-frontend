@@ -6,7 +6,7 @@
 "use client";
 
 import { useState, useMemo, useCallback, useEffect } from "react";
-import { deleteHoliday, type Holiday } from "../services/holidays";
+import { deleteHoliday, type Holiday } from "../services/holidays.service";
 import { formatLongDate } from "../../shared/utils/date";
 import { Card } from "../components";
 
