@@ -1,26 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 
 export const useDropdownSuggestions = (
   allOptions: string[],
   inputValue: string
 ) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [filtered, setFiltered] = useState<string[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const filtered = useMemo(() => {
+    const text = inputValue.trim().toLowerCase();
+    if (!text) return [];
+
+    return allOptions.filter((opt) => opt.toLowerCase().includes(text));
+  }, [inputValue, allOptions]);
 
   useEffect(() => {
-    if (inputValue.trim() === "") {
-      setFiltered([]);
-      setIsOpen(false);
-      return;
-    }
-
-    const matches = allOptions.filter((opt) =>
-      opt.toLowerCase().includes(inputValue.toLowerCase())
-    );
-
-    setFiltered(matches);
-    setIsOpen(matches.length > 0);
-  }, [inputValue, allOptions]);
+    setIsOpen(filtered.length > 0);
+  }, [filtered]);
 
   return { isOpen, filtered, setIsOpen };
 };
