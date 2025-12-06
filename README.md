@@ -1,5 +1,5 @@
-📁 2. Frontend Repository – holiday-planner-frontend
-🌴 Holiday Planner – Frontend
+📁 2. Frontend Repository – business-management-frontend
+🌴 Business Managemeng – Frontend
 A responsive and modern frontend for managing employee holidays, built with React, TypeScript, and TailwindCSS.
 
 🚀 Live Demo
