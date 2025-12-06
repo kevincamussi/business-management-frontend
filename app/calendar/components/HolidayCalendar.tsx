@@ -3,6 +3,8 @@
  * Right-side panel shows details for selected day.
  */
 
+"use client";
+
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { deleteHoliday, type Holiday } from "../services/holidays";
 import { formatLongDate } from "../../shared/utils/date";
@@ -104,6 +106,11 @@ const HolidayCalendar = ({
     setIsCardOpen(holidaysForDay.length > 0);
   };
 
+  const holidaysForDay = useMemo(
+    () => (selectedDay ? daysMap.get(selectedDay.toDateString()) ?? [] : []),
+    [selectedDay, daysMap]
+  );
+
   const handleDelete = useCallback(
     async (id: string) => {
       await deleteHoliday(id);
@@ -113,7 +120,8 @@ const HolidayCalendar = ({
       reloadDepartments();
 
       if (selectedDay) {
-        const remaining = holidaysForDay.filter((h) => h.id !== id);
+        const current = daysMap.get(selectedDay.toDateString()) ?? [];
+        const remaining = current.filter((h) => h.id !== id);
 
         if (remaining.length === 0) {
           setIsCardOpen(false);
@@ -121,12 +129,8 @@ const HolidayCalendar = ({
         }
       }
     },
-    [onDelete, reloadEmployees, reloadDepartments, selectedDay]
+    [onDelete, reloadEmployees, reloadDepartments, selectedDay, daysMap]
   );
-
-  const holidaysForDay = selectedDay
-    ? daysMap.get(selectedDay.toDateString()) ?? []
-    : [];
 
   return (
     <div className="relative flex justify-center lg:justify-between  w-full py-6 text-center lg:px-10 ">

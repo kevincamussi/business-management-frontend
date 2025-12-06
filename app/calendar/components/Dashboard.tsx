@@ -2,11 +2,18 @@
  * Dashboard: main page controlling holidays state.
  */
 
+"use client";
+
 import { useCallback, useEffect, useState } from "react";
 import { getHolidays, type Holiday } from "../services/holidays";
-import { HolidayForm, HolidayCalendar } from "../components";
+import { HolidayForm } from "../components";
 import { useSuggestions } from "../hooks/useSuggestions";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+
+const HolidayCalendar = dynamic(() => import("../components/HolidayCalendar"), {
+  ssr: false,
+});
 
 const Dashboard = () => {
   const [holidays, setHolidays] = useState<Holiday[]>([]);
@@ -25,15 +32,18 @@ const Dashboard = () => {
     await Promise.all([reloadEmployees(), reloadDepartments()]);
   }, [loadHolidays, reloadEmployees, reloadDepartments]);
 
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
+    document.cookie = "token=; path=/; max-age=0;";
+    router.push("/login");
   };
 
   useEffect(() => {
-    void loadAll();
+    const run = async () => {
+      await loadAll();
+    };
+    run();
   }, [loadAll]);
 
   return (

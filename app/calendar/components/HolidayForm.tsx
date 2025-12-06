@@ -1,10 +1,10 @@
 /**
  * Form to create a holiday. Calls onAdd after successful creation.
  */
+"use client";
 
 import React, { useState } from "react";
 import { createHoliday } from "../services/holidays";
-// import { useSuggestions } from "../hooks/useSuggestions";
 import { useDropdownSuggestions } from "../hooks/useDropdownSuggestions";
 import { onlyLetters } from "../../shared/utils/onlyLetters";
 

@@ -1,6 +1,8 @@
+"use client";
+
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { registerUser } from "../api/auth";
+import { registerUser } from "./services/auth";
+import { useRouter } from "next/navigation";
 
 type RegisterFormData = {
   readonly name: string;
@@ -9,7 +11,7 @@ type RegisterFormData = {
 };
 
 const Register = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [formData, setFormData] = useState<RegisterFormData>({
     name: "",
     email: "",
@@ -34,7 +36,7 @@ const Register = () => {
     try {
       await registerUser(formData);
       setSuccess(true);
-      setTimeout(() => navigate("/login"), 1000);
+      setTimeout(() => router.push("/login"), 1000);
     } catch (err: any) {
       console.error("Register error:", err);
       setError(
@@ -110,7 +112,7 @@ const Register = () => {
         <p className="text-center text-sm mt-6">
           Already have an account?{" "}
           <span
-            onClick={() => navigate("/login")}
+            onClick={() => router.push("/login")}
             className="text-blue-500 cursor-pointer hover:underline"
           >
             Login

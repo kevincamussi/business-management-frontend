@@ -1,6 +1,9 @@
+"use client";
+
+import Link from "next/link";
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { loginUser } from "../services/auth";
+import { useRouter } from "next/navigation";
+import { loginUser } from "./services/auth";
 
 type LoginData = {
   readonly email: string;
@@ -11,7 +14,8 @@ const Login = () => {
   const [form, setForm] = useState<LoginData>({ email: "", password: "" });
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,8 +28,8 @@ const Login = () => {
 
     try {
       const data = await loginUser(form);
-      localStorage.setItem("token", data.access_token);
-      navigate("/");
+      document.cookie = `token=${data.access_token}; path=/;`;
+      router.push("/");
     } catch (err: any) {
       setError(err.response?.data?.detail ?? "Invalid email or password");
     } finally {
@@ -37,7 +41,7 @@ const Login = () => {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-md w-96 space-y-4"
+        className="bg-white p-6 rounded-lg shadow-md w-96 space-y-4 "
       >
         <h2 className="text-2xl font-bold text-center">Login</h2>
 
@@ -47,7 +51,7 @@ const Login = () => {
           placeholder="Email"
           value={form.email}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded "
           required
         />
 
@@ -57,7 +61,7 @@ const Login = () => {
           placeholder="Password"
           value={form.password}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded "
           required
         />
 
@@ -79,7 +83,7 @@ const Login = () => {
 
         <p className="text-center text-sm text-gray-600">
           Don’t have an account?{" "}
-          <Link to="/register" className="text-blue-500 hover:underline">
+          <Link href="/register" className="text-blue-500 hover:underline">
             Register
           </Link>
         </p>
