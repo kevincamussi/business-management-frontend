@@ -5,6 +5,8 @@ Built using **Next.js, TypeScript, and TailwindCSS** with a clean, scalable arch
 
 🔗 **Live Demo:** https://business-management-frontend-wheat.vercel.app/
 
+📦 **Backend repository:** https://github.com/kevincamussi/holiday-planner-backend
+
 ---
 
 ## 🚀 Tech Stack
