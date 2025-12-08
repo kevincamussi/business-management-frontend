@@ -3,7 +3,7 @@
 A responsive and modern web application for managing business operations such as expenses, employees, holidays, and more.  
 Built using **Next.js, TypeScript, and TailwindCSS** with a clean, scalable architecture.
 
-🔗 **Live Demo:** https://holiday-planner-frontend-five.vercel.app
+🔗 **Live Demo:** https://business-management-frontend-wheat.vercel.app/
 
 ---
 
@@ -38,7 +38,7 @@ Create a `.env` file in the project root:
 NEXT_PUBLIC_API_URL=http://localhost:8000
 
 git clone https://github.com/kevincamussi/business-management-frontend.git  
-cd holiday-planner-frontend  
+cd business-management-frontend
 npm install  
 npm run dev  
 Frontend will be available at:  
